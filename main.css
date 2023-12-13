@@ -9,11 +9,12 @@ body {
     margin: 0 auto;
     text-align: center;
     box-sizing: border-box;
-    max-width: 700px;
+    max-width: 800px;
+    border: 1px solid #000000;
+    margin-top: 15px;
 }
 
 #my-form {
-    border: 1px solid #f4f4f4;
     padding: 15px;
     margin-top: 10px;
 }
@@ -32,6 +33,7 @@ input {
     padding: 12px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 20px;
+    font-weight: bold;
     background: orchid;
     border-radius: 5px;
     margin-left: 30px;
@@ -43,7 +45,10 @@ input {
 }
 
 .list {
-    border: 1px solid #f4f4f4;
+    margin: 0 auto;
+    max-width: 730px;
+    border: 1px solid #000000;
+    margin-bottom: 10px;
 }
 
 .list-item {
@@ -52,9 +57,10 @@ input {
 
 .delete-btn {
     border: none;
-    padding: 5px;
+    padding: 5px 10px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 15px;
+    font-weight: bold;
     background-color: red;
     border-radius: 5px;
     margin: 15px;
@@ -63,4 +69,19 @@ input {
 .delete-btn-hover:hover {
     cursor: pointer;
     background: rgb(96, 8, 8);
+}
+
+.edit-btn {
+    border: none;
+    padding: 5px 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: orange;
+    border-radius: 5px;
+}
+
+.edit-btn-hover:hover {
+    cursor: pointer;
+    background: rgb(169, 122, 34);
 }
