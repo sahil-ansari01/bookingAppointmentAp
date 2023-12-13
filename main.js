@@ -14,7 +14,7 @@ function onSubmit(e) {
         email: emailIn.value,
         phone: phoneIn.value
     }
-    const userKey = userData.name;
+    const userKey = userData.email;
     const userDataStringify = JSON.stringify(userData);
     localStorage.setItem(userKey, userDataStringify);
 
