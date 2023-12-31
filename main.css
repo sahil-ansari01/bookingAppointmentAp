@@ -8,14 +8,15 @@ body {
 .container {
     margin: 0 auto;
     text-align: center;
+    background-color: #9fc2e5;  
     box-sizing: border-box;
     max-width: 800px;
-    border: 1px solid #000000;
+    border-radius: 5px;
     margin-top: 15px;
 }
 
 #my-form {
-    padding: 15px;
+    padding: 35px;
     margin-top: 10px;
 }
 
@@ -47,7 +48,8 @@ input {
 .list {
     margin: 0 auto;
     max-width: 730px;
-    border: 1px solid #000000;
+    /* border: 1px solid #000000;    */
+    border-radius: 5px;
     margin-bottom: 10px;
 }
 
