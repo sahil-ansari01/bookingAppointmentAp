@@ -6,7 +6,7 @@ const list = document.querySelector('.list');
 
 window.addEventListener("DOMContentLoaded", () => {
     // get data from database/cloud
-    axios.get('https://crudcrud.com/api/dccc1c033fa445d18fc9025a5bdc2529/appointmentData')
+    axios.get('https://crudcrud.com/api/0fac035a6ead42858f895374c23e64d9/appointmentData')
         .then((res) => {
             for (var i = 0; i < res.data.length; i++) {
                 showNewUserOnScreen(res.data[i]); 
@@ -30,7 +30,7 @@ function onSubmit(e) {
         phone: phoneIn.value,
     };
     // save in database/cloud
-    axios.post('https://crudcrud.com/api/dccc1c033fa445d18fc9025a5bdc2529/appointmentData', userData)
+    axios.post('https://crudcrud.com/api/0fac035a6ead42858f895374c23e64d9/appointmentData', userData)
         .then((res) => {
             showNewUserOnScreen(res.data);
         })
@@ -70,13 +70,33 @@ function showNewUserOnScreen(userData) {
     emailIn.value = '';
     phoneIn.value = '';
 
+    editBtn.addEventListener('click', () => {
+        populateInputField(userData);
+        li.remove();
+        updateUserData(userData._id, userData);
+    })
+
+    function populateInputField(userData) {
+        nameIn.value = userData.name;
+        emailIn.value = userData.email;
+        phoneIn.value = userData.phone;
+    }
+
+    function updateUserData(userId, userData) {
+        axios.put(`https://crudcrud.com/api/0fac035a6ead42858f895374c23e64d9/appointmentData/${userId}`, {
+            name: nameIn.value,
+            email: emailIn.value,
+            phone: phoneIn.value
+        })
+    }
+
     delBtn.addEventListener('click', () => {
         deleteUserData(userData._id, userData.name);
         li.remove();
     })
 
     function deleteUserData(userId, name) {
-        axios.delete(`https://crudcrud.com/api/dccc1c033fa445d18fc9025a5bdc2529/appointmentData/${userId}`)
+        axios.delete(`https://crudcrud.com/api/0fac035a6ead42858f895374c23e64d9/appointmentData/${userId}`)
         .then((res) => {
             console.log(`${name}'s data was deleted`)
         })
