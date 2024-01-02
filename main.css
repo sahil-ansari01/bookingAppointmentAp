@@ -3,14 +3,13 @@ body {
     margin: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 20px;
+    background-color: #9fc2e5;
 }
 
 .container {
     margin: 0 auto;
     text-align: center;
-    background-color: #9fc2e5;  
     box-sizing: border-box;
-    max-width: 800px;
     border-radius: 5px;
     margin-top: 15px;
 }
@@ -47,8 +46,6 @@ input {
 
 .list {
     margin: 0 auto;
-    max-width: 730px;
-    /* border: 1px solid #000000;    */
     border-radius: 5px;
     margin-bottom: 10px;
 }
