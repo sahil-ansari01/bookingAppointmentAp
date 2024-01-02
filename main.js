@@ -6,7 +6,7 @@ const list = document.querySelector('.list');
 
 window.addEventListener("DOMContentLoaded", () => {
     // get data from database/cloud
-    axios.get('https://crudcrud.com/api/fc8ff748639e42419fd3f25ab34e23b5/appointmentData')
+    axios.get('https://crudcrud.com/api/dccc1c033fa445d18fc9025a5bdc2529/appointmentData')
         .then((res) => {
             for (var i = 0; i < res.data.length; i++) {
                 showNewUserOnScreen(res.data[i]); 
@@ -30,7 +30,7 @@ function onSubmit(e) {
         phone: phoneIn.value,
     };
     // save in database/cloud
-    axios.post('https://crudcrud.com/api/fc8ff748639e42419fd3f25ab34e23b5/appointmentData', userData)
+    axios.post('https://crudcrud.com/api/dccc1c033fa445d18fc9025a5bdc2529/appointmentData', userData)
         .then((res) => {
             showNewUserOnScreen(res.data);
         })
@@ -70,5 +70,18 @@ function showNewUserOnScreen(userData) {
     emailIn.value = '';
     phoneIn.value = '';
 
-    
+    delBtn.addEventListener('click', () => {
+        deleteUserData(userData._id, userData.name);
+        li.remove();
+    })
+
+    function deleteUserData(userId, name) {
+        axios.delete(`https://crudcrud.com/api/dccc1c033fa445d18fc9025a5bdc2529/appointmentData/${userId}`)
+        .then((res) => {
+            console.log(`${name}'s data was deleted`)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
 }
