@@ -4,84 +4,71 @@ const phoneIn = document.getElementById('phone');
 const myForm = document.querySelector('#my-form');
 const list = document.querySelector('.list');
 
+window.addEventListener("DOMContentLoaded", () => {
+    // get data from database/cloud
+    axios.get('https://crudcrud.com/api/fc8ff748639e42419fd3f25ab34e23b5/appointmentData')
+        .then((res) => {
+            for (var i = 0; i < res.data.length; i++) {
+                showNewUserOnScreen(res.data[i]); 
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
 // onSubmit event listener
 myForm.addEventListener('submit', onSubmit);
 
-// submit function 
+// submit function
 function onSubmit(e) {
     e.preventDefault();
     // fetch user data
     const userData = {
         name: nameIn.value,
         email: emailIn.value,
-        phone: phoneIn.value
-    }
-    
+        phone: phoneIn.value,
+    };
     // save in database/cloud
-    axios.post('https://crudcrud.com/api/08c6b968d64549c283c46dd8a6e2f2a7/appointmentData', userData)
-    .then((res) => {
-        showNewUserOnScreen(res.data)
-        console.log(res)
-    })
-    .catch((err) => {
-        console.log(err);
-    })
+    axios.post('https://crudcrud.com/api/fc8ff748639e42419fd3f25ab34e23b5/appointmentData', userData)
+        .then((res) => {
+            showNewUserOnScreen(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
 
-    function showNewUserOnScreen(userData) {
-        
-        // create li, delete and edit elements
-        const li = document.createElement('li');
-        const delBtn = document.createElement('button');
-        const editBtn = document.createElement('button');
+function showNewUserOnScreen(userData) {
+    // create li, delete and edit elements
+    const li = document.createElement('li');
+    const delBtn = document.createElement('button');
+    const editBtn = document.createElement('button');
 
-        // adding class name to elements
-        li.className = 'list-item';
-        delBtn.className = 'delete-btn delete-btn-hover';
-        editBtn.className = 'edit-btn edit-btn-hover';
+    // adding class name to elements
+    li.className = 'list-item';
+    delBtn.className = 'delete-btn delete-btn-hover';
+    editBtn.className = 'edit-btn edit-btn-hover';
 
-        // adding text node to all element
-        const listTextNode = document.createTextNode(`${nameIn.value} ${emailIn.value} ${phoneIn.value}`);
-        const delBtnTextNode = document.createTextNode('Delete');
-        const editBtnTextNode = document.createTextNode('Edit');
+    // adding text node to all element
+    const listTextNode = document.createTextNode(`${userData.name} ${userData.email} ${userData.phone}`); // Fix: Use userData instead of nameIn, emailIn, phoneIn
+    const delBtnTextNode = document.createTextNode('Delete');
+    const editBtnTextNode = document.createTextNode('Edit');
 
-        // append textNode to specific elements
-        li.appendChild(listTextNode);
-        delBtn.appendChild(delBtnTextNode);
-        editBtn.appendChild(editBtnTextNode);
+    // append textNode to specific elements
+    li.appendChild(listTextNode);
+    delBtn.appendChild(delBtnTextNode);
+    editBtn.appendChild(editBtnTextNode);
 
-        // append element to parent element
-        list.appendChild(li);
-        li.appendChild(delBtn);
-        li.appendChild(editBtn);
+    // append element to parent element
+    list.appendChild(li);
+    li.appendChild(delBtn);
+    li.appendChild(editBtn);
 
-        // clear input
-        nameIn.value = '';
-        emailIn.value = '';
-        phoneIn.value = '';
-
-        // event listener
-        delBtn.addEventListener('click', deleteEl);
-        editBtn.addEventListener('click', editEl);
-
-        // Delete function
-        function deleteEl() {
-            li.remove();
-            localStorage.removeItem(userKey);
-        }
-
-        // Edit function
-        function editEl() {
-            const values = JSON.parse(localStorage.getItem(userKey));
-            nameIn.value = values.name;
-            emailIn.value = values.email;
-            phoneIn.value = values.phone;
-
-            li.remove();
-            localStorage.removeItem(userKey);
-        }
-
-    }
+    // clear input
+    nameIn.value = '';
+    emailIn.value = '';
+    phoneIn.value = '';
 
     
 }
-
